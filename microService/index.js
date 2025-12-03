@@ -21,13 +21,25 @@ app.get("/", function (req, res) {
     res.end();
 });
 */
-app.get('/:prenom', function (req, res) {
-    console.log(req.params)
-    console.log(req.body)
-    console.log("Bonjour à toi ", req.params.prenom);
+//curl localhost:8000/ludovic
+app.get('/somme/:a/:b', function (req, res) {
+    console.log(req.params.a)
+    console.log(req.params.b)
+    console.log("somme: ", parseInt(req.params.a) + parseInt(req.params.b));
     res.statusCode = '200'
     res.json({
-        message: "Bonjour à toi " + req.params.prenom
+        message: "Somme " + (parseInt(req.params.a) + parseInt(req.params.b))
+    });
+    res.end()
+})
+
+app.get('/multiplication/:a/:b', function (req, res) {
+    console.log(req.params.a)
+    console.log(req.params.b)
+    console.log("multiplication: ", parseInt(req.params.a) * parseInt(req.params.b));
+    res.statusCode = '200'
+    res.json({
+        message: "Multiplication " + (parseInt(req.params.a) * parseInt(req.params.b))
     });
     res.end()
 })
