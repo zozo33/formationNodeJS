@@ -6,36 +6,38 @@ const db = new pg.Client({
     user: "formationNode",
     password: "formationNode",
     database: "formationNode"
-})
+});
 
-console.log("Connexion établie");
+// Fonction principale asynchrone
+async function main() {
+    try {
+        // Connexion à la base de données
+        await db.connect();
+        console.log("Connexion établie");
 
-// créer une table 
-let sql = "create table if not exists cours (id int primary key, libelle string)"
-db.query(sql, function (err) {
-    if (err) {
-        console.log("Erreur ", err)
-    } else {
-        console.log("Table cours créée")
+        // Créer une table
+        let sql = "CREATE TABLE IF NOT EXISTS cours (id INT PRIMARY KEY, libelle VARCHAR(255))";
+        await db.query(sql);
+        console.log("Table cours créée");
+
+        // Insertion de données
+        sql = "INSERT INTO cours (id, libelle) VALUES (2, 'Yoga') ON CONFLICT (id) DO NOTHING";
+        const insertResult = await db.query(sql);
+        console.log("Insertion effectuée");
+
+        // Sélection des données
+        sql = "SELECT * FROM cours";
+        const result = await db.query(sql);
+        console.log("Rows:", result.rows);
+
+    } catch (err) {
+        console.log("Erreur:", err);
+    } finally {
+        // Fermer la connexion
+        await db.end();
+        console.log("Connexion fermée");
     }
-})
+}
 
-sql = "insert into cours (id, libelle) values (2, 'Yoga')"
-db.query(sql, function (err) {
-    if (err) {
-        console.log("Erreur ", err)
-    } else {
-        console.log("Insertion effectuée")
-    }
-})
-
-sql = "select * from cours"
-db.query(sql, function (err, rows) {
-    if (err) {
-        console.log("Erreur ", err)
-    } else {
-        console.log("Rows ", rows)
-    }
-})
-
-db.end();
+// Exécuter la fonction principale
+main();

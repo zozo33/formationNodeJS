@@ -27,6 +27,19 @@ app.get('/', function (req, res) {
     db.close();
 })
 
+app.get('/:id', function (req, res) {
+    // Contacter la base de données et retourner les rows/json
+    const db = new sqlite3.Database("formations.db")
+
+    let query = "select * from cours where id = " + req.params.id
+    db.get(query, function (err, row) {
+        console.log(row);
+        res.json(row);
+    })
+
+    db.close();
+})
+
 app.listen('8000', function () {
     console.log("Le services ecoute")
 })
