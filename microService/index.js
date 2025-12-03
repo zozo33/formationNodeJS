@@ -21,7 +21,12 @@ app.get("/", function (req, res) {
     res.end();
 });
 */
-//curl localhost:8000/ludovic
+/*
+ludovic.potrich@macbookpro formationNodeJS % curl localhost:8000/somme/10/12
+{"message":"Somme 22"}%                                                                                                                    
+ludovic.potrich@macbookpro formationNodeJS % curl localhost:8000/multiplication/10/12
+
+*/
 app.get('/somme/:a/:b', function (req, res) {
     console.log(req.params.a)
     console.log(req.params.b)
