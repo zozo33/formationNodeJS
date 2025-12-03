@@ -21,7 +21,7 @@ async function main() {
         console.log("Table cours créée");
 
         // Insertion de données
-        sql = "INSERT INTO cours (id, libelle) VALUES (2, 'Yoga') ON CONFLICT (id) DO NOTHING";
+        sql = "INSERT INTO cours (id, libelle) VALUES (1, 'NodeJS') ON CONFLICT (id) DO NOTHING";
         const insertResult = await db.query(sql);
         console.log("Insertion effectuée");
 
