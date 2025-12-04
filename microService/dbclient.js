@@ -1,3 +1,4 @@
+/*
 import pg from "pg";
 
 const db = new pg.Client({
@@ -41,3 +42,22 @@ async function main() {
 
 // Exécuter la fonction principale
 main();
+*/
+
+import { Client } from 'pg'
+
+const client = new Client({
+    user: 'formationNode',
+    password: 'formationNode',
+    host: 'localhost',
+    port: 5432,
+    database: 'formationNode',
+})
+
+client.connect().then(async () => {
+    //let res = await client.query('SELECT NOW()')
+    let res = await client.query('select * from cours')
+    console.log(res.rows)
+    //await client.query("insert into cours values (3,'Karaté')")
+    await client.end()
+})
