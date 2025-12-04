@@ -4,6 +4,7 @@ const app = express();
 
 //fusion un template + data => rendu final
 app.set("view engine", "ejs");
+app.use('/statics', express.static('statics'));
 
 //data à afficher
 let Formations = [
