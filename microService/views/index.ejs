@@ -1,0 +1,17 @@
+<html>
+
+<body>
+    <!--il faut que titre soit defini dynamiquement-->
+    <h1>
+        <%=titre%>
+    </h1>
+    <ul>
+        <% for(let formation of formations){ %>
+            <li>
+                <%=formation.id%> - <%=formation.libelle%>
+            </li>
+            <% } %>
+    </ul>
+</body>
+
+</html>

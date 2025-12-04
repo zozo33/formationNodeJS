@@ -61,7 +61,6 @@ app.post('/', async (req, res) => {
         console.log(req.body)
         console.log(req.body.libelle)
 
-        // Utiliser RETURNING pour obtenir la ligne insérée
         let sql = "INSERT INTO cours (id, libelle) VALUES ($1, $2) ON CONFLICT (id) DO UPDATE SET libelle = $2 RETURNING *";
         const insertResult = await db.query(sql, [req.body.id, req.body.libelle]);
         console.log("Insertion effectuée:", insertResult.rows[0]);
