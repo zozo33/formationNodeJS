@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<script>
+    function getFormation() {
+        // demander au service REST de faire l'opération
+        // afficher le resultat dans h1
+        let idFormation = document.querySelector("#idFormation").value
+        if (idFormation != '') {
+            fetch(`http://localhost:8000/${idFormation}`)
+                .then(formations => formations.json())
+                .then(formations => {
+                    console.log("**", formations);
+                    let reponse = "<table>"
+                    reponse += "<tr><td>" + formations.id + "</td><td>" + formations.libelle + "</td></tr>"
+                    reponse += "</table>"
+                    document.querySelector("#resultat").innerHTML = reponse;
+                })
+        } else {
+            fetch(`http://localhost:8000/`)
+                .then(r => r.json())
+                .then(r => {
+                    console.log("**", r);
+                    let reponse = "<table>"
+                    for (let formation2 of r) {
+                        reponse += "<tr><td>" + formation2.id + "</td><td>" + formation2.libelle + "</td></tr>"
+                    }
+                    reponse += "</table>"
+                    document.querySelector("#resultat").innerHTML = reponse;
+                })
+        }
+    }
+
+    function postFormation() {
+        // demander au service REST de faire l'opération
+        // afficher le resultat dans h1
+        let idForm = document.querySelector("#idForm").value
+        let libelleFormation = document.querySelector("#libelleFormation").value
+
+        fetch('http://localhost:8000/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: idForm,
+                libelle: libelleFormation
+            })
+        })
+            .then(response => response.json())
+            .then(formations => {
+                console.log("**", formations);
+                let reponse = "<table>"
+                reponse += "<tr><td>" + formations.id + "</td><td>" + formations.libelle + "</td></tr>"
+                reponse += "</table>"
+                document.querySelector("#resultatPost").innerHTML = reponse;
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                document.querySelector("#resultatPost").innerHTML = "<p style='color:red'>Erreur lors de l'envoi</p>";
+            })
+    }
+</script>
+
+<body>
+
+    id : <input type="number" id="idFormation" value="" />
+    <button onclick="getFormation()">formations</button>
+    <h1 id="resultat"></h1>
+
+    id : <input type="number" id="idForm" value="" />
+    libelle : <input type="text" id="libelleFormation" value="" />
+    <button onclick="postFormation()">post formations</button>
+    <h1 id="resultatPost"></h1>
+</body>
+
+</html>
