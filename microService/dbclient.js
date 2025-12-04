@@ -1,4 +1,5 @@
 /*
+//first version
 import pg from "pg";
 
 const db = new pg.Client({
@@ -44,6 +45,7 @@ async function main() {
 main();
 */
 
+//second version
 import { Client } from 'pg'
 
 const client = new Client({
