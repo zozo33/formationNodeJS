@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<script>
+    function somme() {
+        // demander au service REST de faire l'opération
+        // afficher le resultat dans h1
+        fetch("http://localhost:8000/somme/10/20")
+            .then(r => r.json())
+            .then(r => {
+                console.log(r);
+                document.querySelector("#resultat").innerHTML = r.resultat;
+            })
+    }
+</script>
+
+<body>
+    V1 : <input type="number" value="10" />
+    V2 : <input type="number" value="20" />
+    <button onclick="somme()">Somme</button>
+    <h1 id="resultat"></h1>
+</body>
+
+</html>
