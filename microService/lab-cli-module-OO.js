@@ -1,4 +1,4 @@
-import DbAccess from './dbclientSqlLiteOO.js';
+import DbAccess from './dbClientSqlLiteOO.js'
 
 let da = new DbAccess()
 let formations = da.lire()
